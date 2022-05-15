@@ -15,9 +15,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\parallelProcessing\\ParallelMinimumSpanningTree\\ParallelMinimumSpanningTree\\ParallelMinimumSpanningTree.csproj",
-      "projectName": "ParallelMinimumSpanningTree",
-      "projectPath": "C:\\parallelProcessing\\ParallelMinimumSpanningTree\\ParallelMinimumSpanningTree\\ParallelMinimumSpanningTree.csproj",
+      "projectUniqueName": "C:\\parallelProcessing\\ParallelMinimumSpanningTree\\ParallelMinimumSpanningTree\\UI.csproj",
+      "projectName": "UI",
+      "projectPath": "C:\\parallelProcessing\\ParallelMinimumSpanningTree\\ParallelMinimumSpanningTree\\UI.csproj",
       "packagesPath": "C:\\Users\\vasko\\.nuget\\packages\\",
       "outputPath": "C:\\parallelProcessing\\ParallelMinimumSpanningTree\\ParallelMinimumSpanningTree\\obj\\",
       "projectStyle": "PackageReference",
