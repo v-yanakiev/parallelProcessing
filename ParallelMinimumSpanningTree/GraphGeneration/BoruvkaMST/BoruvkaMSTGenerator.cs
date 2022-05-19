@@ -37,44 +37,42 @@ namespace GraphGeneration.BoruvkaMST
             }
             while (numberOfTrees > 1)
             {
-                foreach (var i in Enumerable.Range(0,this.edges.Count))
-                {
-                    var u = this.edges[i].FirstNode.Id;
-                    var v = this.edges[i].SecondNode.Id;
-                    var w = this.edges[i].Weighting;
+                Parallel.ForEach(this.edges, edge => {
+                    var u = edge.FirstNode.Id;
+                    var v = edge.SecondNode.Id;
+                    var w = edge.Weighting;
                     var setNumberOfU = this.find(parent, u);
                     var setNumberOfV = this.find(parent, v);
                     if (setNumberOfU != setNumberOfV)
                     {
                         if (cheapest[setNumberOfU] == null || cheapest[setNumberOfU].Weighting > w)
                         {
-                            cheapest[setNumberOfU] = this.edges[i];
+                            cheapest[setNumberOfU] = edge;
                         }
                         if (cheapest[setNumberOfV] == null || cheapest[setNumberOfV].Weighting > w)
                         {
-                            cheapest[setNumberOfV] = this.edges[i];
+                            cheapest[setNumberOfV] = edge;
                         }
                     }
-                    
-                }
-                foreach (var node in Enumerable.Range(0,this.Nodes.Count))
+                });
+                Parallel.ForEach(this.Nodes, node =>
                 {
-                    if (cheapest[node] != null)
+                    if (cheapest[node.Id] != null)
                     {
-                        var u = cheapest[node].FirstNode.Id;
-                        var v = cheapest[node].SecondNode.Id;
-                        var w = cheapest[node].Weighting;
+                        var u = cheapest[node.Id].FirstNode.Id;
+                        var v = cheapest[node.Id].SecondNode.Id;
+                        var w = cheapest[node.Id].Weighting;
                         var setNumberOfU = this.find(parent, u);
                         var setNumberOfV = this.find(parent, v);
                         if (setNumberOfU != setNumberOfV)
                         {
-                            MST.Add(cheapest[node]);
+                            MST.Add(cheapest[node.Id]);
                             this.Union(parent, rank, setNumberOfU, setNumberOfV);
                             MSTWeight += w;
                             numberOfTrees--;
                         }
                     }
-                }
+                });
                 for (int i = 0; i < cheapest.Count; i++)
                 {
                     cheapest[i] = null;
