@@ -32,7 +32,7 @@ namespace GraphGeneration.BoruvkaMST
             foreach (var node in this.Nodes)
             {
                 parent.Add(node.Id);
-                rank.Append(0);
+                rank.Add(0);
                 cheapest.Add(null);
             }
             while (numberOfTrees > 1)
@@ -71,6 +71,7 @@ namespace GraphGeneration.BoruvkaMST
                             MST.Add(cheapest[node]);
                             this.Union(parent, rank, setNumberOfU, setNumberOfV);
                             MSTWeight += w;
+                            numberOfTrees--;
                         }
                     }
                 }
