@@ -41,6 +41,7 @@ namespace UI_WPF
             var canvas = this.FindName("Canvas") as Canvas;
             DrawGraph(this.Graph, canvas);
             (this.FindName("Generate_Minimum_Spanning_Tree") as Button).IsEnabled = true;
+            (this.FindName("MstWeightLabel") as Label).Content = "";
         }
         private void DrawGraph(Graph graph, Canvas canvas)
         {
@@ -65,14 +66,14 @@ namespace UI_WPF
             BoruvkaMSTGenerator MSTGenerator = new BoruvkaMSTGenerator(this.Graph.Nodes,this.Graph.Edges);
             var a =MSTGenerator.Generate();
             var canvas = this.FindName("Canvas") as Canvas;
-            DrawMST(a.Item1, canvas);
+            DrawMST(a, canvas);
 
         }
-        private void DrawMST(List<Edge> edges, Canvas canvas)
+        private void DrawMST(Tuple<List<Edge>, double> MST, Canvas canvas)
         {
             //canvas.Children.Clear();
             //const int CircleDiameter = 20;
-            foreach (var edge in edges)
+            foreach (var edge in MST.Item1)
             {
                 //Ellipse ellipse1 = new Ellipse() { Height = CircleDiameter, Width = CircleDiameter, Fill = Brushes.Black };
                 //canvas.Children.Add(ellipse1);
@@ -85,6 +86,7 @@ namespace UI_WPF
                 Line line = new Line { Stroke = Brushes.Green, StrokeThickness=3, X1 = edge.FirstNode.XCoordinate, X2 = edge.SecondNode.XCoordinate, Y1 = edge.FirstNode.YCoordinate, Y2 = edge.SecondNode.YCoordinate };
                 canvas.Children.Add(line);
             }
+            (this.FindName("MstWeightLabel") as Label).Content = "MST Weight: " + Math.Round(MST.Item2,2);
             (this.FindName("Generate_Minimum_Spanning_Tree") as Button).IsEnabled = false;
         }
     }
