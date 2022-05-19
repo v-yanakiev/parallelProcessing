@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "ParallelMinimumSpanningTree\UI.csproj", "{BDB9E551-E271-4E51-A6F8-49DFA3F5D4A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphGeneration", "GraphGeneration\GraphGeneration.csproj", "{9AB63F34-A3E4-4A00-8A39-198763FD13D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphGeneration", "GraphGeneration\GraphGeneration.csproj", "{9AB63F34-A3E4-4A00-8A39-198763FD13D1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI_WPF", "UI_WPF\UI_WPF.csproj", "{C5CAB726-D9E9-4528-8007-53D30182F090}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI_WPF", "UI_WPF\UI_WPF.csproj", "{C5CAB726-D9E9-4528-8007-53D30182F090}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BDB9E551-E271-4E51-A6F8-49DFA3F5D4A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDB9E551-E271-4E51-A6F8-49DFA3F5D4A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDB9E551-E271-4E51-A6F8-49DFA3F5D4A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDB9E551-E271-4E51-A6F8-49DFA3F5D4A1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9AB63F34-A3E4-4A00-8A39-198763FD13D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9AB63F34-A3E4-4A00-8A39-198763FD13D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AB63F34-A3E4-4A00-8A39-198763FD13D1}.Release|Any CPU.ActiveCfg = Release|Any CPU

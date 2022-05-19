@@ -36,7 +36,7 @@ namespace UI_WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Graph = Generator.GenerateGraph(this.nodeCount);
+            this.Graph = GraphGeneration.GraphGeneration.GenerateGraph(this.nodeCount);
             var canvas = this.FindName("Canvas") as Canvas;
             DrawGraph(this.Graph, canvas);
         }
@@ -48,12 +48,12 @@ namespace UI_WPF
             {
                 Ellipse ellipse = new Ellipse() { Height = CircleDiameter, Width = CircleDiameter, Fill = Brushes.Black };
                 canvas.Children.Add(ellipse);
-                Canvas.SetTop(ellipse, node.YCoordinate*5- CircleDiameter/2);
-                Canvas.SetLeft(ellipse, node.XCoordinate*10- CircleDiameter/2);
+                Canvas.SetTop(ellipse, node.YCoordinate- CircleDiameter/2);
+                Canvas.SetLeft(ellipse, node.XCoordinate- CircleDiameter/2);
             }
             foreach(var edge in graph.Edges)
             {
-                Line line =new Line {Stroke=Brushes.LightBlue, X1=edge.FirstNode.XCoordinate * 10, X2=edge.SecondNode.XCoordinate * 10, Y1=edge.FirstNode.YCoordinate * 5, Y2=edge.SecondNode.YCoordinate * 5 };
+                Line line =new Line {Stroke=Brushes.LightBlue, X1=edge.FirstNode.XCoordinate, X2=edge.SecondNode.XCoordinate, Y1=edge.FirstNode.YCoordinate, Y2=edge.SecondNode.YCoordinate };
                 canvas.Children.Add(line);
             }
         }

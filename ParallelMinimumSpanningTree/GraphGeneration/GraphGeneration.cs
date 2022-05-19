@@ -1,10 +1,10 @@
 ﻿namespace GraphGeneration
 {
-    public static class Generator
+    public static class GraphGeneration
     {
         public static Graph GenerateGraph(int nodeCount)
         {
-            var canvasSize = 100;
+            var canvasSize = 600;
             var graph = new Graph();
             var rand = new Random();
 
@@ -15,16 +15,20 @@
 
         private static void AddEdgesToGraph(Graph graph, Random rand)
         {
-            for (int i = 0; i < graph.Nodes.Count; i++)
+            var nodeArray = graph.Nodes.ToArray();
+            for (int i = 0; i < nodeArray.Length; i++)
             {
-                Node node = graph.Nodes[i];
+                Node node = nodeArray[i];
                 for (int i2 = i+1; i2 < graph.Nodes.Count; i2++)
                 {
-                    Node node2 = graph.Nodes[i2];
+                    Node node2 = nodeArray[i2];
                     int randomValue = rand.Next(0, 100);
                     if (randomValue < 25)
                     {
-                        graph.Edges.Add(new Edge(node, node2, Math.Sqrt(Math.Pow(node.XCoordinate - node2.XCoordinate, 2) + Math.Pow(node.YCoordinate - node2.YCoordinate, 2))));
+                        var edge = new Edge(node, node2, Math.Sqrt(Math.Pow(node.XCoordinate - node2.XCoordinate, 2) + Math.Pow(node.YCoordinate - node2.YCoordinate, 2)));
+                        graph.Edges.Add(edge);
+                        //node.Edges.Add(edge);
+                        //node2.Edges.Add(edge);
                     }
                 }
             }

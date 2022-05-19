@@ -20,8 +20,17 @@
         <Label x:Name="NodeCount" Content="Node Count:" HorizontalAlignment="Left" Margin="19,21,0,0" VerticalAlignment="Top" Height="42" Width="110" FontSize="16" Grid.Column="1"/>
         <TextBox HorizontalAlignment="Left" Margin="10,26,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="69" TextChanged="TextBox_TextChanged" Grid.Column="2" Height="32" FontSize="16"/>
         <Button Content="Generate Graph" HorizontalAlignment="Left" Margin="197,26,0,0" VerticalAlignment="Top" Height="32" Width="130" FontSize="16" Grid.Column="2" Click="Button_Click"/>
-        <Button x:Name="Generate_Minimum_Covering_Tree" Grid.Column="2" Content="Generate Minimum Covering Tree" HorizontalAlignment="Left" Margin="355,26,0,0" VerticalAlignment="Top" IsEnabled="False" FontSize="16" Height="32" Width="260"/>
-        <Canvas x:Name="Canvas" Margin="10,83,48,46" Grid.ColumnSpan="4" Grid.Column="1"/>
+        <Button x:Name="Generate_Minimum_Covering_Tree" Grid.Column="2" Content="Generate Minimum Spanning Tree" HorizontalAlignment="Left" Margin="355,26,0,0" VerticalAlignment="Top" IsEnabled="False" FontSize="16" Height="32" Width="260"/>
+        <Canvas x:Name="Canvas" Margin="19,82,183,54" Grid.ColumnSpan="4" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.006"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+        </Canvas>
         <Label x:Name="NodeCount_Copy" Content="Node Count:" HorizontalAlignment="Left" Margin="19,21,0,0" VerticalAlignment="Top" Height="42" Width="110" FontSize="16" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBox HorizontalAlignment="Left" Margin="10,26,0,0" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="69" TextChanged="TextBox_TextChanged" Grid.Column="2" Height="32" FontSize="16"/>
 

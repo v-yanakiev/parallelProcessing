@@ -1,0 +1,12 @@
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\bin\Debug\net6.0\GraphGeneration.deps.json
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\bin\Debug\net6.0\GraphGeneration.dll
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\bin\Debug\net6.0\GraphGeneration.pdb
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\obj\Debug\net6.0\GraphGeneration.csproj.AssemblyReference.cache
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\obj\Debug\net6.0\GraphGeneration.GeneratedMSBuildEditorConfig.editorconfig
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\obj\Debug\net6.0\GraphGeneration.AssemblyInfoInputs.cache
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\obj\Debug\net6.0\GraphGeneration.AssemblyInfo.cs
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\obj\Debug\net6.0\GraphGeneration.csproj.CoreCompileInputs.cache
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\obj\Debug\net6.0\GraphGeneration.dll
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\obj\Debug\net6.0\refint\GraphGeneration.dll
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\obj\Debug\net6.0\GraphGeneration.pdb
+C:\parallelProcessing\ParallelMinimumSpanningTree\GraphGeneration\obj\Debug\net6.0\ref\GraphGeneration.dll
