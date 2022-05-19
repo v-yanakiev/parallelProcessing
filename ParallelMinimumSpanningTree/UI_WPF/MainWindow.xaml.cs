@@ -26,6 +26,7 @@ namespace UI_WPF
         int nodeCount=0;
         bool doNotDisplayGraphOnGeneration = false;
         bool doNotDisplayNodes = false;
+        bool disableAllVisualDisplay = false;
 
         public MainWindow()
         {
@@ -40,15 +41,18 @@ namespace UI_WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Graph = GraphGeneration.GraphGeneration.GenerateGraph(this.nodeCount);
             var canvas = this.FindName("Canvas") as Canvas;
-            DrawGraph(this.Graph, canvas);
+            canvas.Children.Clear();
+            this.Graph = GraphGeneration.GraphGeneration.GenerateGraph(this.nodeCount);
+            if (!disableAllVisualDisplay)
+            {
+                DrawGraph(this.Graph, canvas);
+            }
             (this.FindName("Generate_Minimum_Spanning_Tree") as Button).IsEnabled = true;
             (this.FindName("MstWeightLabel") as Label).Content = "";
         }
         private void DrawGraph(Graph graph, Canvas canvas)
         {
-            canvas.Children.Clear();
             if (!this.doNotDisplayGraphOnGeneration)
             {
                 if (!this.doNotDisplayNodes)
@@ -72,10 +76,16 @@ namespace UI_WPF
 
         private void Generate_Minimum_Spanning_Tree_Click(object sender, RoutedEventArgs e)
         {
+            var canvas = this.FindName("Canvas") as Canvas;
             BoruvkaMSTGenerator MSTGenerator = new BoruvkaMSTGenerator(this.Graph.Nodes.ToList(),this.Graph.Edges.ToList());
             var a =MSTGenerator.Generate();
-            var canvas = this.FindName("Canvas") as Canvas;
-            DrawMST(a, canvas);
+            if (!this.disableAllVisualDisplay)
+            {
+                DrawMST(a, canvas);
+            }
+            (this.FindName("MstWeightLabel") as Label).Content = "MST Weight: " + Math.Round(a.Item2, 2);
+            (this.FindName("Generate_Minimum_Spanning_Tree") as Button).IsEnabled = false;
+
 
         }
         private void DrawMST(Tuple<List<Edge>, double> MST, Canvas canvas)
@@ -101,8 +111,6 @@ namespace UI_WPF
                 Line line = new Line { Stroke = Brushes.Green, StrokeThickness=3, X1 = edge.FirstNode.XCoordinate, X2 = edge.SecondNode.XCoordinate, Y1 = edge.FirstNode.YCoordinate, Y2 = edge.SecondNode.YCoordinate };
                 canvas.Children.Add(line);
             }
-            (this.FindName("MstWeightLabel") as Label).Content = "MST Weight: " + Math.Round(MST.Item2,2);
-            (this.FindName("Generate_Minimum_Spanning_Tree") as Button).IsEnabled = false;
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -113,6 +121,10 @@ namespace UI_WPF
         private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
         {
             this.doNotDisplayNodes = !this.doNotDisplayNodes;
+        }
+        private void CheckBox_Checked_2(object sender, RoutedEventArgs e)
+        {
+            this.disableAllVisualDisplay = !this.disableAllVisualDisplay;
         }
     }
 }

@@ -36,6 +36,7 @@
         <Label x:Name="MstWeightLabel" Grid.Column="3" Content="" HorizontalAlignment="Left" Margin="21,20,0,0" VerticalAlignment="Top" Height="54" Width="206" FontSize="16" Grid.ColumnSpan="2"/>
         <CheckBox Grid.Column="1" Content="Do not display graph on generation" HorizontalAlignment="Left" Margin="19,81,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="284" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" FontSize="16"/>
         <CheckBox Grid.Column="2" Content="Do not display nodes" HorizontalAlignment="Left" Margin="262,81,0,0" VerticalAlignment="Top" Width="195" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Checked_1" FontSize="16"/>
+        <CheckBox Grid.Column="2" Content="Disable visual display" HorizontalAlignment="Left" Margin="489,81,0,0" VerticalAlignment="Top" Width="195" Checked="CheckBox_Checked_2" Unchecked="CheckBox_Checked_2" FontSize="16" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>
