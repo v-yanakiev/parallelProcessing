@@ -63,7 +63,7 @@ namespace UI_WPF
 
         private void Generate_Minimum_Spanning_Tree_Click(object sender, RoutedEventArgs e)
         {
-            BoruvkaMSTGenerator MSTGenerator = new BoruvkaMSTGenerator(this.Graph.Nodes,this.Graph.Edges);
+            BoruvkaMSTGenerator MSTGenerator = new BoruvkaMSTGenerator(this.Graph.Nodes.ToList(),this.Graph.Edges.ToList());
             var a =MSTGenerator.Generate();
             var canvas = this.FindName("Canvas") as Canvas;
             DrawMST(a, canvas);

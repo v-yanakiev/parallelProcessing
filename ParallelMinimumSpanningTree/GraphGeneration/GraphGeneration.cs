@@ -22,13 +22,13 @@
                 for (int i2 = i+1; i2 < graph.Nodes.Count; i2++)
                 {
                     Node node2 = nodeArray[i2];
-                    if (graph.Nodes.Count<20 || rand.Next(0, 100) < 25)
-                    {
+                    //if (graph.Nodes.Count<20 || rand.Next(0, 100) < 25)
+                    //{
                         var edge = new Edge(node, node2, Math.Sqrt(Math.Pow(node.XCoordinate - node2.XCoordinate, 2) + Math.Pow(node.YCoordinate - node2.YCoordinate, 2)));
                         graph.Edges.Add(edge);
                         //node.Edges.Add(edge);
                         //node2.Edges.Add(edge);
-                    }
+                    //}
                 }
             }
         }
