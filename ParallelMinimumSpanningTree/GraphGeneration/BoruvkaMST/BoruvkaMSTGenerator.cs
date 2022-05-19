@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace GraphGeneration.BoruvkaMST
 {
-    public class Graph
+    public class BoruvkaMSTGenerator
     {
-        public Graph(List<Node> nodes,List<Edge> edges)
+        public BoruvkaMSTGenerator(List<Node> nodes,List<Edge> edges)
         {
             this.Nodes = nodes;
             this.edges = edges;
@@ -17,7 +17,7 @@ namespace GraphGeneration.BoruvkaMST
         public List<Node> Nodes { get; private set; } //nodes
         //public List<int> nodeIds { get; set; }
         public List<Edge> edges { get; private set; }
-        public Tuple<List<Edge>,double> BoruvkaMST()
+        public Tuple<List<Edge>,double> Generate()
         {
             var parent = new List<int>();
             var rank = new List<int>();

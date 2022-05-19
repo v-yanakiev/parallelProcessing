@@ -1,4 +1,5 @@
 ﻿using GraphGeneration;
+using GraphGeneration.BoruvkaMST;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,7 @@ namespace UI_WPF
             this.Graph = GraphGeneration.GraphGeneration.GenerateGraph(this.nodeCount);
             var canvas = this.FindName("Canvas") as Canvas;
             DrawGraph(this.Graph, canvas);
+            (this.FindName("Generate_Minimum_Spanning_Tree") as Button).IsEnabled = true;
         }
         private void DrawGraph(Graph graph, Canvas canvas)
         {
@@ -56,6 +58,34 @@ namespace UI_WPF
                 Line line =new Line {Stroke=Brushes.LightBlue, X1=edge.FirstNode.XCoordinate, X2=edge.SecondNode.XCoordinate, Y1=edge.FirstNode.YCoordinate, Y2=edge.SecondNode.YCoordinate };
                 canvas.Children.Add(line);
             }
+        }
+
+        private void Generate_Minimum_Spanning_Tree_Click(object sender, RoutedEventArgs e)
+        {
+            BoruvkaMSTGenerator MSTGenerator = new BoruvkaMSTGenerator(this.Graph.Nodes,this.Graph.Edges);
+            var a =MSTGenerator.Generate();
+            var canvas = this.FindName("Canvas") as Canvas;
+            DrawMST(a.Item1, canvas);
+
+        }
+        private void DrawMST(List<Edge> edges, Canvas canvas)
+        {
+            canvas.Children.Clear();
+            const int CircleDiameter = 20;
+            foreach (var edge in edges)
+            {
+                Ellipse ellipse1 = new Ellipse() { Height = CircleDiameter, Width = CircleDiameter, Fill = Brushes.Black };
+                canvas.Children.Add(ellipse1);
+                Canvas.SetTop(ellipse1, edge.FirstNode.YCoordinate - CircleDiameter / 2);
+                Canvas.SetLeft(ellipse1, edge.FirstNode.XCoordinate - CircleDiameter / 2);
+                Ellipse ellipse2 = new Ellipse() { Height = CircleDiameter, Width = CircleDiameter, Fill = Brushes.Black };
+                canvas.Children.Add(ellipse2);
+                Canvas.SetTop(ellipse2, edge.SecondNode.YCoordinate - CircleDiameter / 2);
+                Canvas.SetLeft(ellipse2, edge.SecondNode.XCoordinate - CircleDiameter / 2);
+                Line line = new Line { Stroke = Brushes.Green, X1 = edge.FirstNode.XCoordinate, X2 = edge.SecondNode.XCoordinate, Y1 = edge.FirstNode.YCoordinate, Y2 = edge.SecondNode.YCoordinate };
+                canvas.Children.Add(line);
+            }
+            (this.FindName("Generate_Minimum_Spanning_Tree") as Button).IsEnabled = false;
         }
     }
 }

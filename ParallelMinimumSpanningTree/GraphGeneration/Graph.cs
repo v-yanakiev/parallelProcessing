@@ -10,11 +10,11 @@ namespace GraphGeneration
     {
         public Graph()
         {
-            Nodes = new HashSet<Node>();
-            Edges = new HashSet<Edge>();
+            Nodes = new List<Node>();
+            Edges = new List<Edge>();
         }
 
-        public HashSet<Node> Nodes { get; set; }
-        public HashSet<Edge> Edges { get; set; }
+        public List<Node> Nodes { get; set; }
+        public List<Edge> Edges { get; set; }
     }
 }
