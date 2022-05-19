@@ -70,19 +70,19 @@ namespace UI_WPF
         }
         private void DrawMST(List<Edge> edges, Canvas canvas)
         {
-            canvas.Children.Clear();
-            const int CircleDiameter = 20;
+            //canvas.Children.Clear();
+            //const int CircleDiameter = 20;
             foreach (var edge in edges)
             {
-                Ellipse ellipse1 = new Ellipse() { Height = CircleDiameter, Width = CircleDiameter, Fill = Brushes.Black };
-                canvas.Children.Add(ellipse1);
-                Canvas.SetTop(ellipse1, edge.FirstNode.YCoordinate - CircleDiameter / 2);
-                Canvas.SetLeft(ellipse1, edge.FirstNode.XCoordinate - CircleDiameter / 2);
-                Ellipse ellipse2 = new Ellipse() { Height = CircleDiameter, Width = CircleDiameter, Fill = Brushes.Black };
-                canvas.Children.Add(ellipse2);
-                Canvas.SetTop(ellipse2, edge.SecondNode.YCoordinate - CircleDiameter / 2);
-                Canvas.SetLeft(ellipse2, edge.SecondNode.XCoordinate - CircleDiameter / 2);
-                Line line = new Line { Stroke = Brushes.Green, X1 = edge.FirstNode.XCoordinate, X2 = edge.SecondNode.XCoordinate, Y1 = edge.FirstNode.YCoordinate, Y2 = edge.SecondNode.YCoordinate };
+                //Ellipse ellipse1 = new Ellipse() { Height = CircleDiameter, Width = CircleDiameter, Fill = Brushes.Black };
+                //canvas.Children.Add(ellipse1);
+                //Canvas.SetTop(ellipse1, edge.FirstNode.YCoordinate - CircleDiameter / 2);
+                //Canvas.SetLeft(ellipse1, edge.FirstNode.XCoordinate - CircleDiameter / 2);
+                //Ellipse ellipse2 = new Ellipse() { Height = CircleDiameter, Width = CircleDiameter, Fill = Brushes.Black };
+                //canvas.Children.Add(ellipse2);
+                //Canvas.SetTop(ellipse2, edge.SecondNode.YCoordinate - CircleDiameter / 2);
+                //Canvas.SetLeft(ellipse2, edge.SecondNode.XCoordinate - CircleDiameter / 2);
+                Line line = new Line { Stroke = Brushes.Green, StrokeThickness=3, X1 = edge.FirstNode.XCoordinate, X2 = edge.SecondNode.XCoordinate, Y1 = edge.FirstNode.YCoordinate, Y2 = edge.SecondNode.YCoordinate };
                 canvas.Children.Add(line);
             }
             (this.FindName("Generate_Minimum_Spanning_Tree") as Button).IsEnabled = false;
