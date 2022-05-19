@@ -43,14 +43,23 @@ namespace GraphGeneration.BoruvkaMST
                     {
                         cheapest.Add(null);
                     }
+                    int?[] setOfSetNumbers=new int?[Nodes.Count];
                     for (int i = (edges.Count / threadCount) * (partitionNumber-1); i < (edges.Count/ threadCount)*partitionNumber; i++)
                     {
                         Edge? edge = this.edges[i];
                         var u = edge.FirstNode.Id;
                         var v = edge.SecondNode.Id;
                         var w = edge.Weight;
-                        var setNumberOfU = this.find(parent, u);
-                        var setNumberOfV = this.find(parent, v);
+                        if (setOfSetNumbers[u] == null)
+                        {
+                            setOfSetNumbers[u] = this.find(parent, u);
+                        }
+                        if (setOfSetNumbers[v] == null)
+                        {
+                            setOfSetNumbers[v] = this.find(parent, v);
+                        }
+                        var setNumberOfU = setOfSetNumbers[u].Value;
+                        var setNumberOfV = setOfSetNumbers[v].Value;
                         if (setNumberOfU != setNumberOfV)
                         {
                             if (cheapest[setNumberOfU] == null || cheapest[setNumberOfU].Weight > w)

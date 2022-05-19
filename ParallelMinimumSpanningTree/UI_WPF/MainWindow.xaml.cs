@@ -2,6 +2,7 @@
 using GraphGeneration.BoruvkaMST;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,13 +79,17 @@ namespace UI_WPF
         {
             var canvas = this.FindName("Canvas") as Canvas;
             BoruvkaMSTGenerator MSTGenerator = new BoruvkaMSTGenerator(this.Graph.Nodes.ToList(),this.Graph.Edges.ToList());
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             var a =MSTGenerator.Generate();
+            stopwatch.Stop();
+            (this.FindName("MstWeightLabel") as Label).Content = "MST Weight: " + Math.Round(a.Item2, 2)+"\nTime taken (milliseconds): "+stopwatch.ElapsedMilliseconds;
+            (this.FindName("Generate_Minimum_Spanning_Tree") as Button).IsEnabled = false;
+
             if (!this.disableAllVisualDisplay)
             {
                 DrawMST(a, canvas);
             }
-            (this.FindName("MstWeightLabel") as Label).Content = "MST Weight: " + Math.Round(a.Item2, 2);
-            (this.FindName("Generate_Minimum_Spanning_Tree") as Button).IsEnabled = false;
 
 
         }
