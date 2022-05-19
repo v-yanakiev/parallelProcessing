@@ -65,7 +65,7 @@ namespace GraphGeneration.BoruvkaMST
                     }
                     return cheapest;
                 };
-                var arrayOfTasks=Enumerable.Range(1,8).Select(i=>Task.Run(cheapestEdgeSelectionGeneration(i))).ToArray();
+                var arrayOfTasks=Enumerable.Range(1, threadCount).Select(i=>Task.Run(cheapestEdgeSelectionGeneration(i))).ToArray();
                 Task.WaitAll(arrayOfTasks);
                 var cheapestAcrossAllPartitionComputations = new List<Edge?>();
 
