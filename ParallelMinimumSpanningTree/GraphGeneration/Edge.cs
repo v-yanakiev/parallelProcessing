@@ -6,11 +6,11 @@
         {
             FirstNode = firstNode;
             SecondNode = secondNode;
-            Weighting = weighting;
+            Weight = weighting;
         }
 
         public Node FirstNode { get; set; }
         public Node SecondNode { get; set; }
-        public double Weighting { get; set; }
+        public double Weight { get; set; }
     }
 }

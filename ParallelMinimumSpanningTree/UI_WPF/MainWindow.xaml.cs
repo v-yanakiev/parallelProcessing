@@ -24,6 +24,9 @@ namespace UI_WPF
     {
         public Graph? Graph { get; set; }
         int nodeCount=0;
+        bool doNotDisplayGraphOnGeneration = false;
+        bool doNotDisplayNodes = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,18 +49,24 @@ namespace UI_WPF
         private void DrawGraph(Graph graph, Canvas canvas)
         {
             canvas.Children.Clear();
-            const int CircleDiameter = 20;
-            foreach (var node in graph.Nodes)
+            if (!this.doNotDisplayGraphOnGeneration)
             {
-                Ellipse ellipse = new Ellipse() { Height = CircleDiameter, Width = CircleDiameter, Fill = Brushes.Black };
-                canvas.Children.Add(ellipse);
-                Canvas.SetTop(ellipse, node.YCoordinate - CircleDiameter / 2);
-                Canvas.SetLeft(ellipse, node.XCoordinate - CircleDiameter / 2);
-            }
-            foreach (var edge in graph.Edges)
-            {
-                Line line = new Line { Stroke = Brushes.LightBlue, X1 = edge.FirstNode.XCoordinate, X2 = edge.SecondNode.XCoordinate, Y1 = edge.FirstNode.YCoordinate, Y2 = edge.SecondNode.YCoordinate };
-                canvas.Children.Add(line);
+                if (!this.doNotDisplayNodes)
+                {
+                    const int CircleDiameter = 20;
+                    foreach (var node in graph.Nodes)
+                    {
+                        Ellipse ellipse = new Ellipse() { Height = CircleDiameter, Width = CircleDiameter, Fill = Brushes.Black };
+                        canvas.Children.Add(ellipse);
+                        Canvas.SetTop(ellipse, node.YCoordinate - CircleDiameter / 2);
+                        Canvas.SetLeft(ellipse, node.XCoordinate - CircleDiameter / 2);
+                    }
+                }
+                foreach (var edge in graph.Edges)
+                {
+                    Line line = new Line { Stroke = Brushes.LightBlue, X1 = edge.FirstNode.XCoordinate, X2 = edge.SecondNode.XCoordinate, Y1 = edge.FirstNode.YCoordinate, Y2 = edge.SecondNode.YCoordinate };
+                    canvas.Children.Add(line);
+                }
             }
         }
 
@@ -88,6 +97,16 @@ namespace UI_WPF
             }
             (this.FindName("MstWeightLabel") as Label).Content = "MST Weight: " + Math.Round(MST.Item2,2);
             (this.FindName("Generate_Minimum_Spanning_Tree") as Button).IsEnabled = false;
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            this.doNotDisplayGraphOnGeneration = !this.doNotDisplayGraphOnGeneration;
+        }
+
+        private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
+        {
+            this.doNotDisplayNodes = !this.doNotDisplayNodes;
         }
     }
 }

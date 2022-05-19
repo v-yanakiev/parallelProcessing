@@ -22,7 +22,6 @@ namespace GraphGeneration.BoruvkaMST
             var parent = new List<int>();
             var rank = new List<int>();
             var numberOfTrees = this.Nodes.Count;
-            var cheapest = new List<Edge?>();
             var MST = new List<Edge>();
             var MSTWeight = 0.0;
             for (int i = 0; i < this.Nodes.Count; i++)
@@ -33,49 +32,65 @@ namespace GraphGeneration.BoruvkaMST
             {
                 parent.Add(node.Id);
                 rank.Add(0);
-                cheapest.Add(null);
             }
             while (numberOfTrees > 1)
             {
-                Parallel.ForEach(this.edges, edge => {
-                    var u = edge.FirstNode.Id;
-                    var v = edge.SecondNode.Id;
-                    var w = edge.Weighting;
-                    var setNumberOfU = this.find(parent, u);
-                    var setNumberOfV = this.find(parent, v);
-                    if (setNumberOfU != setNumberOfV)
-                    {
-                        if (cheapest[setNumberOfU] == null || cheapest[setNumberOfU].Weighting > w)
-                        {
-                            cheapest[setNumberOfU] = edge;
-                        }
-                        if (cheapest[setNumberOfV] == null || cheapest[setNumberOfV].Weighting > w)
-                        {
-                            cheapest[setNumberOfV] = edge;
-                        }
-                    }
-                });
-                Parallel.ForEach(this.Nodes, node =>
+                var threadCount = 8;
+                var cheapestEdgeSelectionGeneration = (int partitionNumber) =>()=>
                 {
-                    if (cheapest[node.Id] != null)
+                    var cheapest = new List<Edge?>();
+                    foreach (var node in this.Nodes)
                     {
-                        var u = cheapest[node.Id].FirstNode.Id;
-                        var v = cheapest[node.Id].SecondNode.Id;
-                        var w = cheapest[node.Id].Weighting;
+                        cheapest.Add(null);
+                    }
+                    for (int i = (edges.Count / threadCount) * (partitionNumber-1); i < (edges.Count/ threadCount)*partitionNumber; i++)
+                    {
+                        Edge? edge = this.edges[i];
+                        var u = edge.FirstNode.Id;
+                        var v = edge.SecondNode.Id;
+                        var w = edge.Weight;
                         var setNumberOfU = this.find(parent, u);
                         var setNumberOfV = this.find(parent, v);
                         if (setNumberOfU != setNumberOfV)
                         {
-                            MST.Add(cheapest[node.Id]);
+                            if (cheapest[setNumberOfU] == null || cheapest[setNumberOfU].Weight > w)
+                            {
+                                cheapest[setNumberOfU] = edge;
+                            }
+                            if (cheapest[setNumberOfV] == null || cheapest[setNumberOfV].Weight > w)
+                            {
+                                cheapest[setNumberOfV] = edge;
+                            }
+                        }
+                    }
+                    return cheapest;
+                };
+                var arrayOfTasks=Enumerable.Range(1,8).Select(i=>Task.Run(cheapestEdgeSelectionGeneration(i))).ToArray();
+                Task.WaitAll(arrayOfTasks);
+                var cheapestAcrossAllPartitionComputations = new List<Edge?>();
+
+             
+                for (int i = 0; i < this.Nodes.Count; i++)
+                {
+                    cheapestAcrossAllPartitionComputations.Add(arrayOfTasks.Select(a => a.Result).MinBy(a => a[i] == null ? int.MaxValue : a[i].Weight)?[i]);
+                }
+                foreach (var node in this.Nodes)
+                {
+                    if (cheapestAcrossAllPartitionComputations[node.Id] != null)
+                    {
+                        var u = cheapestAcrossAllPartitionComputations[node.Id].FirstNode.Id;
+                        var v = cheapestAcrossAllPartitionComputations[node.Id].SecondNode.Id;
+                        var w = cheapestAcrossAllPartitionComputations[node.Id].Weight;
+                        var setNumberOfU = this.find(parent, u);
+                        var setNumberOfV = this.find(parent, v);
+                        if (setNumberOfU != setNumberOfV)
+                        {
+                            MST.Add(cheapestAcrossAllPartitionComputations[node.Id]);
                             this.Union(parent, rank, setNumberOfU, setNumberOfV);
                             MSTWeight += w;
                             numberOfTrees--;
                         }
                     }
-                });
-                for (int i = 0; i < cheapest.Count; i++)
-                {
-                    cheapest[i] = null;
                 }
             }
             return new Tuple<List<Edge>, double>(MST, MSTWeight);
